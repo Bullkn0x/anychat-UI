@@ -28,8 +28,8 @@ $(function () {
     var currentRoom;
     var sideBarActive = false;
     // Prompt for setting a username
-    var username;
-    var connected = false;
+    var username = 'bullkn0x';
+    var connected = true;
     var typing = false;
     var lastTypingTime;
     var $currentInput = $usernameInput.focus();
@@ -82,6 +82,7 @@ $(function () {
     });
     // Sends a chat message
     function sendMessage() {
+        console.log('send');
         var message = $inputMessage.val();
         var roomid = $('.messages').attr('room_id');
         console.log(roomid);
@@ -414,7 +415,7 @@ $(function () {
     dropzone.ondrop = function (e) {
         $('#textnode').hide();
 
-        $uploadModal.addClass('animated fadeIn').show();
+        $uploadModal.addClass('animated bounceIn').show();
         
         // document.querySelector("#textnode").src = null;
         //     document.querySelector("#dropzone").style.visibility = "hidden";

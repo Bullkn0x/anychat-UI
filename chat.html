@@ -17,13 +17,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
 
     <!-- Side Bar -->
-    <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css'>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
 <link rel="stylesheet" href="./css/sidebar.css">
 <link rel="stylesheet" href="./css/userlist.css">
 <link rel="stylesheet" href="./css/filebox.css">
 <link rel="stylesheet" href="./css/modal.css">
 <link rel="stylesheet" href="./css/uploadModal.css">
+<link rel="stylesheet" href="./css/themeToggler.css">
+
 
 
 <!-- End -->
@@ -95,7 +96,7 @@
 
 
             <!-- Nav Start -->
-            <div class="navcontainer animated slideInDown delay-2s">
+            <div class="navcontainer animated slideInDown delay-1s">
                 <nav class="navbar navbar-expand-lg navbar-dark ">
                     <a class="navbar-brand" href="#">Anychat.io</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample09"
@@ -131,23 +132,23 @@
             <!-- Chat And Side Bar Container  -->
             <div class="components" style="height: 100%;" id="body-row">
                     <!-- Sidebar -->
-                    <div id="sidebar-container" class="flex sidebar-expanded d-none d-md-block animated slideInLeft delay-1s"><!-- d-* hiddens the Sidebar in smaller devices. Its itens can be kept on the Navbar 'Menu' -->
+                    <div id="sidebar-container" class="flex sidebar-expanded d-none d-md-block animated slideInLeft delay-0.5s"><!-- d-* hiddens the Sidebar in smaller devices. Its itens can be kept on the Navbar 'Menu' -->
                         <!-- Bootstrap List Group -->
                         <ul class="list-group">
                             <!-- Separator with title -->
-                            <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
+                            <li class="list-group-item sidebar-separator-title menuHeader d-flex align-items-center menu-collapsed">
                                 <small>MAIN MENU</small>
                             </li>
                             <!-- /END Separator -->
                             <!-- Menu with submenu -->
-                            <a id="addServer" href="#" class="bg-dark list-group-item list-group-item-action">
+                            <a id="addServer" href="#" class="menuItem list-group-item list-group-item-action">
                                 <div class="d-flex w-100 justify-content-start align-items-center">
                                     <span class="fa fa-plus fa-fw mr-3"></span>
                                     <span class="addServer menu-collapsed"">Add Server</span>
                                 </div>
                             </a>
                             
-                            <a href="#submenu1" data-toggle="collapse" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+                            <a href="#submenu1" data-toggle="collapse" aria-expanded="false" class="menuItem list-group-item list-group-item-action flex-column align-items-start">
                                 <div class="d-flex w-100 justify-content-start align-items-center">
                                     <span class="fa fa-dashboard fa-fw mr-3"></span> 
                                     <span class="menu-collapsed">Your Servers</span>
@@ -155,8 +156,21 @@
                                 </div>
                             </a>
                             <!-- Submenu content -->
-                            <div id="submenu1" class="serverList sidebar-submenu collapse show" style=""><a href="#" class="list-group-item list-group-item-action bg-dark text-white" room_id="1"><img src="http://d1cpyz6yyb1kha.cloudfront.net/59c06463b972775e7c31ebc446d11919.png?size=128" style="max-height: 133%; border-radius: 16%; margin-right: 10px;"><span class="menu-collapsed">Global Chat</span></a><a href="#" class="list-group-item list-group-item-action bg-dark text-white" room_id="2"><img src="http://d1cpyz6yyb1kha.cloudfront.net/59c06463b972775e7c31ebc446d11919.png?size=128" style="max-height: 133%; border-radius: 16%; margin-right: 10px;"><span class="menu-collapsed">Boys</span></a><a href="#" class="list-group-item list-group-item-action bg-dark text-white" room_id="6"><img style="max-height: 133%; border-radius: 16%; margin-right: 10px;"><span class="menu-collapsed">Bot Testing</span></a></div>
-                            <a href="#submenu2" data-toggle="collapse" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+                            <div id="submenu1" class="serverList sidebar-submenu collapse" style="">
+                                <a href="#" class="list-group-item list-group-item-action menuItem text-white" room_id="1">
+                                    <img src="http://d1cpyz6yyb1kha.cloudfront.net/59c06463b972775e7c31ebc446d11919.png?size=128" style="max-height: 133%; border-radius: 16%; margin-right: 10px;">
+                                    <span class="menu-collapsed">Global Chat</span>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action menuItem text-white" room_id="2">
+                                    <img src="http://d1cpyz6yyb1kha.cloudfront.net/59c06463b972775e7c31ebc446d11919.png?size=128" style="max-height: 133%; border-radius: 16%; margin-right: 10px;">
+                                    <span class="menu-collapsed">Boys</span>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action menuItem text-white" room_id="6">
+                                    <img style="max-height: 133%; border-radius: 16%; margin-right: 10px;">
+                                    <span class="menu-collapsed">Bot Testing</span>
+                                </a>
+                            </div>
+                            <a href="#submenu2" data-toggle="collapse" aria-expanded="false" class="menuItem list-group-item list-group-item-action flex-column align-items-start">
                                 <div class="d-flex w-100 justify-content-start align-items-center">
                                     <span class="fa fa-user fa-fw mr-3"></span>
                                     <span class="menu-collapsed">Profile</span>
@@ -165,31 +179,31 @@
                             </a>
                             <!-- Submenu content -->
                             <div id='submenu2' class="collapse sidebar-submenu">
-                                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                                <a href="#" class="list-group-item list-group-item-action menuItem text-white">
                                     <span class="menu-collapsed">Settings</span>
                                 </a>
-                                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
+                                <a href="#" class="list-group-item list-group-item-action menuItem text-white">
                                     <span class="menu-collapsed">Password</span>
                                 </a>
                             </div>            
-                            <a href="#" class="bg-dark list-group-item list-group-item-action">
+                            <a href="#" class="menuItem list-group-item list-group-item-action">
                                 <div class="d-flex w-100 justify-content-start align-items-center">
                                     <span class="fa fa-tasks fa-fw mr-3"></span>
                                     <span class="menu-collapsed">Tasks</span>    
                                 </div>
                             </a>
                             <!-- Separator with title -->
-                            <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
+                            <li class="list-group-item sidebar-separator-title menuHeader d-flex align-items-center menu-collapsed">
                                 <small>OPTIONS</small>
                             </li>
                             <!-- /END Separator -->
-                            <a href="#" class="bg-dark list-group-item list-group-item-action">
+                            <a href="#" class="menuItem list-group-item list-group-item-action">
                                 <div class="d-flex w-100 justify-content-start align-items-center">
                                     <span class="fa fa-cog fa-fw mr-3"></span>
                                     <span class="menu-collapsed">Settings</span>
                                 </div>
                             </a>
-                            <a href="#" class="bg-dark list-group-item list-group-item-action">
+                            <a href="#" class="menuItem list-group-item list-group-item-action">
                                 <div class="d-flex w-100 justify-content-start align-items-center">
                                     <span class="fa fa-envelope-o fa-fw mr-3"></span>
                                     <span class="menu-collapsed">Messages <span class="badge badge-pill ml-2" style="background-color: #2196f3;">5</span></span>
@@ -198,13 +212,13 @@
                             <!-- Separator without title -->
                             <li class="list-group-item sidebar-separator menu-collapsed"></li>            
                             <!-- /END Separator -->
-                            <a href="#" class="bg-dark list-group-item list-group-item-action">
+                            <a href="#" class="menuItem list-group-item list-group-item-action">
                                 <div class="d-flex w-100 justify-content-start align-items-center">
                                     <span class="fa fa-question fa-fw mr-3"></span>
                                     <span class="menu-collapsed">Help</span>
                                 </div>
                             </a>
-                            <a href="#" data-toggle="sidebar-colapse" class="bg-dark list-group-item list-group-item-action d-flex align-items-center">
+                            <a href="#" data-toggle="sidebar-colapse" class="menuItem list-group-item list-group-item-action d-flex align-items-center">
                                 <div class="d-flex w-100 justify-content-start align-items-center">
                                     <span id="collapse-icon" class="fa fa-2x mr-3"></span>
                                     <span id="collapse-text" class="menu-collapsed">Collapse</span>
@@ -213,18 +227,28 @@
                             <!-- Logo -->
                             <li class="list-group-item logo-separator d-flex justify-content-center">
                                 <img src="./assets/logo.png" width="30" height="30" />    
-                            </li>   
+                            </li>  
+                            <div class="toggle toggle--daynight">
+                                <input type="checkbox" id="toggle--daynight" class="toggle--checkbox">
+                                <label class="toggle--btn" for="toggle--daynight"><span class="toggle--feature"></span></label>
+                            </div> 
                         </ul><!-- List Group END-->
                     </div><!-- sidebar-container END -->
                     <!-- MAIN -->
                         
-                    <div class="chatArea flex-grow animated fadeIn delay-3s">
+                    <div class="chatArea flex-grow">
                         
 
-                        <ul class="messages">
+                        <ul class="messages animated fadeIn delay-2s">
+                            <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
+                            <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
+                            <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
+                            <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
+                            <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
+                            <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
 
                         </ul>
-                        <div class="inputContainer">
+                        <div class="inputContainer animated slideInUp delay-1s">
                             <i class="flex large material-icons buttons">add</i>
                             <input class="inputMessage flex-grow"  placeholder="Type here or drag file to upload..." />
                             <i class="flex large material-icons buttons emojiZone">insert_emoticon</i>
@@ -257,7 +281,11 @@
                             </div>
                             
                             </div>
-                            <input id="pm_input" type="text" class="chats__input" placeholder="Your message">
+                            <div class="inputContainer chats__input">
+                                <i class="flex large material-icons buttons">add</i>
+                                <input class="inputMessage flex-grow" placeholder="Type here or drag file to upload...">
+                                <i class="flex large material-icons buttons emojiZone">insert_emoticon</i>
+                            </div>
                         </div>
                     </div>
                     
@@ -306,6 +334,7 @@
 <script src="./js/chat.js"></script>
 <script src="./js/userlist.js"></script>
 <script src="./js/modal.js"></script>
+<script src="./js/themeToggler.js"></script>
 
 
 

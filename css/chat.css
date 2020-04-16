@@ -1,3 +1,33 @@
+
+:root {
+    --theme-name: dark;
+    --bg-color: #212529;
+    --primary-color: #333;
+    --secondary-color: #343a40;
+    --font-color: white;
+    --header-font-color: #6c757d;
+    --secondary-font-color: #222331;
+
+    --heading-color: #292922;
+    --message-bg-other:  #E9EAF3;
+    --message-bg-mine: #495057;
+    --chat-top-bar-color: #2196f3;
+}
+
+
+:root[theme='light'] {
+    --theme-name: light;
+    --bg-color: #d6d7d9;
+    --primary-color: #c2c2c2 !important;
+    --secondary-color: #a8aaac;
+    --font-color: #434141;
+    --header-font-color: #6c757d;
+    --secondary-font-color: #f9f9ff;
+    --heading-color: #b1b121;
+    --message-bg-other: #2196f3;
+    --message-bg-mine: #ced3d8;
+    --chat-top-bar-color: #2196f3;
+}
 /* Online list  */
 .left-right {
   overflow:hidden;
@@ -47,7 +77,7 @@
   }
   
   html, body {
-    background-color: #212529 !important;
+    background-color: var(--bg-color) !important;
     height: 100%;
     margin: 0;
     padding: 0;
@@ -120,8 +150,7 @@
     margin: auto;
 }
 .navbar {
-    background-color: #333;
-    border-bottom: solid 1px;
+    background-color: var(--primary-color);
     border-bottom-left-radius: 40px;
     border-bottom-right-radius: 40px;
 }
