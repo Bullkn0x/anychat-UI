@@ -14,6 +14,8 @@
     --chat-top-bar-color: #2196f3;
     --message-input-color: #343a40;
     --input-text-color: white;
+    --menu-hover-color: #222222;
+    --menu-text-collapsed-color: white;
 }
 
 
@@ -32,6 +34,8 @@
     --chat-top-bar-color: #2196f3;
     --message-input-color: #cecece;
     --input-text-color: black;
+    --menu-hover-color: #999999;
+    --menu-text-collapsed-color: black;
 }
 /* Online list  */
 .left-right {

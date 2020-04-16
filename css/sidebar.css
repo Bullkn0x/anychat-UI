@@ -30,6 +30,8 @@
     color: var(--font-color);
 }
 
+
+
 /* Submenu item*/
 #sidebar-container .list-group .sidebar-submenu a {
     height: 45px;
@@ -55,6 +57,15 @@
 #sidebar-container > ul a {
     background-color: var(--secondary-color) !important;
 }
+
+span.menu-collapsed{
+    color: var(--font-color);
+}
+
+#sidebar-container > ul a:hover{
+    background-color: var(--menu-hover-color) !important;
+  }
+
 #sidebar-container > ul > li {
     color: var(--header-font-color);
 }
