@@ -12,6 +12,8 @@
     --message-bg-other:  #E9EAF3;
     --message-bg-mine: #495057;
     --chat-top-bar-color: #2196f3;
+    --message-input-color: #343a40;
+    --input-text-color: white;
 }
 
 
@@ -28,6 +30,8 @@
     --message-bg-other: #2196f3;
     --message-bg-mine: #ced3d8;
     --chat-top-bar-color: #2196f3;
+    --message-input-color: #cecece;
+    --input-text-color: black;
 }
 /* Online list  */
 .left-right {
@@ -167,7 +171,7 @@
     border: none;
     width: 90%;
     font-size: 100%;
-    color: #ffffff;
+    color: var(--input-text-color);
   }
   
   .log {
@@ -225,7 +229,7 @@
   /* input message box */
 .inputContainer {
   display: flex;
-  background-color: #343a40;
+  background-color: var(--message-input-color);
   padding: 10px 0 10px 0 ;
   border-radius: 8px;
   width: 99%;
