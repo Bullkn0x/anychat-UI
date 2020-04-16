@@ -7,7 +7,7 @@
     --font-color: white;
     --header-font-color: #6c757d;
     --secondary-font-color: #222331;
-
+    --hover-color:  #333333;
     --heading-color: #292922;
     --message-bg-other:  #E9EAF3;
     --message-bg-mine: #495057;
@@ -23,6 +23,7 @@
     --font-color: #434141;
     --header-font-color: #6c757d;
     --secondary-font-color: #f9f9ff;
+    --hover-color: #c2c2c2;
     --heading-color: #b1b121;
     --message-bg-other: #2196f3;
     --message-bg-mine: #ced3d8;
@@ -175,11 +176,23 @@
     margin: 5px;
     text-align: center;
   }
+
+  .message:hover{
+    background-color: var(--hover-color);
+  }
+
+  /* padding to the each message  */
+  
+  li.message {
+    padding-left: 20px;
+    /* padding-bottom: 10px;
+    padding-top: 10px; */
+  }
   
   /* Messages */
   
   .chatArea {
-    color: #ffffff;
+    color: var(--font-color);
     height: 86.9%;
     margin: 4px 4px 16px 16px;
   }
