@@ -12,18 +12,25 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@2.12.1/dist/index.min.js"></script>
-
+    
     <!-- nav Animation -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
-
+    
     <!-- Side Bar -->
-<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
-<link rel="stylesheet" href="./css/sidebar.css">
-<link rel="stylesheet" href="./css/userlist.css">
-<link rel="stylesheet" href="./css/filebox.css">
-<link rel="stylesheet" href="./css/modal.css">
-<link rel="stylesheet" href="./css/uploadModal.css">
-<link rel="stylesheet" href="./css/themeToggler.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <link rel="stylesheet" href="./css/sidebar.css">
+    <link rel="stylesheet" href="./css/userlist.css">
+    <link rel="stylesheet" href="./css/filebox.css">
+    <link rel="stylesheet" href="./css/modal.css">
+    <link rel="stylesheet" href="./css/uploadModal.css">
+    <link rel="stylesheet" href="./css/themeToggler.css">
+    <link rel="stylesheet" href="./css/tools.css">
+    <link rel="stylesheet" href="./css/topnav.css">
+    <link rel="stylesheet" href="./css/searchModal.css">
+    <link href="./css/Hover-master/css/hover-min.css" rel="stylesheet">
+
+
+
 
 
 
@@ -64,19 +71,44 @@
  
     <ul class="pages">
 
-        <li class="chat page">
+        <li class="chat page flex-col">
             <!-- The Modal -->
             <div id="myModal" class="modal">
-
-                <!-- Modal content -->
                 <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <p>Public Hangout spots to chat out</p>
-                    
-                    <div class="joinServerList"><div class="buttons"><button class="slide"><img src="http://d1cpyz6yyb1kha.cloudfront.net/59c06463b972775e7c31ebc446d11919.png?size=128"></button><div style="color: rgb(23, 162, 184);">Boys</div></div><div class="buttons"><button class="slide"><img src="http://d1cpyz6yyb1kha.cloudfront.net/python.png"></button><div style="color: rgb(23, 162, 184);">Python</div></div><div class="buttons"><button class="slide"><img src="http://d1cpyz6yyb1kha.cloudfront.net/csgo.png"></button><div style="color: rgb(23, 162, 184);">CSGO</div></div><div class="buttons"><button class="slide"><img></button><div style="color: rgb(23, 162, 184);">Bot Testing</div></div></div>
-
+                    <div id="container" class="view-initial flex-col">
+                        <div id="banner-bkgrd">
+                            <div id="banner-overlay" class="expand-vertical">
+                                <header id="search-container" class="flex-column flex-center">
+                                    <input id="back-btn" type="submit"" class="fa hvr-pulse-grow"
+                                            value="&#xf053;" title="Search" />
+                                    <div id="search-heading">
+                                        <h1>Find Your Community</h1>
+                                    </div>
+                                    <form id="search-form" class="flex-inline">
+                                        <input id="search-input" type="text" autocomplete="off" tabindex="1"
+                                            autocapitalize="off" autocorrect="off" name="search-query"
+                                            placeholder="I'm feeling chatty about..." />
+                                        <input id="search-clear" class "" type="button" tabindex="3" value="×">
+                                        <input id="search-btn" type="submit" tabindex="2" class="fa fa-lg"
+                                            value="&#xf002;" title="Search" />
+                                    </form>
+                                    <form  class="search-options flex-row ">
+                                        <button id="searchTopServers">Browse Top</button>
+                                        <button>Have Invite Link?</button>
+                                    </form>
+                                
+                                </header>
+                            </div>
+                            <!--/banner-overlay-->
+                        </div>
+                        <!--/banner-->
+                        <main id="results">
+                            <div id="cards" class="flex-row flex-wrap"></div>
+                        </main>
+                        <!--/results-->
+                    </div>
+                    <!--/container-->
                 </div>
-               
             </div>
             <div class="uploadModalContainer">
                 <div class="uploadModal">
@@ -88,7 +120,7 @@
                     <div class="actions ">
             
                         <button class="btn btn-secondary" type="submit flex">Cancel</button>
-                        <button class="btn btn-success" type="submit flex">Upload</button>
+                        <button id="upload" class="btn btn-success" type="submit flex">Upload</button>
             
                     </div>
                 </div>
@@ -97,7 +129,7 @@
 
             <!-- Nav Start -->
             <div class="navcontainer animated slideInDown delay-1s">
-                <nav class="navbar navbar-expand-lg navbar-dark ">
+                <nav class="navbar navbar-expand-lg">
                     <a class="navbar-brand" href="#">Anychat.io</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample09"
                         aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
@@ -107,7 +139,7 @@
                         <ul class="navbar-nav mr-auto">
 
                             <li class="nav-item dropdown">
-                                <a id="language" class="nav-link dropdown-toggle text-white" href="http://example.com"
+                                <a id="language" class="nav-link dropdown-toggle" href="http://example.com"
                                     id="dropdown09" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="flag-icon flag-icon-us"> </span> English</a>
                                 <div class="dropdown-menu" aria-labelledby="dropdown09">
@@ -130,7 +162,7 @@
 
 
             <!-- Chat And Side Bar Container  -->
-            <div class="components" style="height: 100%;" id="body-row">
+            <div class="components flex-row" style="height: 100%;" id="body-row">
                     <!-- Sidebar -->
                     <div id="sidebar-container" class="flex sidebar-expanded d-none d-md-block animated slideInLeft delay-0.5s"><!-- d-* hiddens the Sidebar in smaller devices. Its itens can be kept on the Navbar 'Menu' -->
                         <!-- Bootstrap List Group -->
@@ -225,24 +257,51 @@
                                 </div>
                             </a>
                             <!-- Logo -->
-                            <!-- <li class="list-group-item logo-separator d-flex justify-content-center">
-                                 <img src="./assets/logo.png" width="30" height="30" />     
-                            </li>   -->
-                                <div class="toggle toggle--daynight">
-                                    <input type="checkbox" id="toggle--daynight" class="toggle--checkbox">
-                                    <label class="toggle--btn" for="toggle--daynight"><span class="toggle--feature"></span></label>
-                                </div> 
-                                
-                            
-                            
+                            <li class="list-group-item logo-separator d-flex justify-content-center">
+                                <img src="./assets/logo.png" width="30" height="30" />    
+                            </li>  
+                            <div class="toggle toggle--daynight">
+                                <input type="checkbox" id="toggle--daynight" class="toggle--checkbox">
+                                <label class="toggle--btn" for="toggle--daynight"><span class="toggle--feature"></span></label>
+                            </div> 
                         </ul><!-- List Group END-->
                     </div><!-- sidebar-container END -->
                     <!-- MAIN -->
                         
-                    <div class="chatArea flex-grow">
+                    <div class="chatArea flex-col flex-grow">
                         
 
-                        <ul class="messages animated fadeIn delay-2s">
+                        <ul class="flex-grow messages animated fadeIn slower delay-2s" >  
+                            <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
+                            <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
+                            <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
+                            <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
+                            <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
+                            <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
+                            <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
+                            <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
+                            <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
+                            <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
+                            <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
+                            <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
+                            <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
+                            <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
+                            <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
+                            <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
+                            <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
+                            <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
+                            <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
+                            <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
+                            <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
+                            <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
+                            <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
+                            <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
+                            <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
+                            <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
+                            <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
+                            <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
+                            <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
+                            <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
                             <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
                             <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
                             <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
@@ -251,14 +310,13 @@
                             <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
 
                         </ul>
-                        <div class="inputContainer animated slideInUp delay-1s">
-                            <i class="flex large material-icons buttons">add</i>
-                            <input class="inputMessage flex-grow"  placeholder="Type here or drag file to upload..." />
-                            <i class="flex large material-icons buttons emojiZone">insert_emoticon</i>
+                        <div class="inhold animated slideInUp delay-1s">
+                            <div class="flex inputContainer" style= "margin-bottom: 20px;">
+                                <i class="flex large material-icons buttons">add</i>
+                                <input class="inputMessage flex-grow"  placeholder="Type here or drag file to upload..." />
+                                <i class="flex large material-icons buttons emojiZone">insert_emoticon</i>
+                            </div>
                         </div>
-                        <button id="upload">Upload files</button>
-                        <div id='filelist'></div>
-
                     </div>
                         
                     <!-- <div class="flex userList left-right"> -->
@@ -337,6 +395,7 @@
 <script src="./js/userlist.js"></script>
 <script src="./js/modal.js"></script>
 <script src="./js/themeToggler.js"></script>
+<script src="./js/searchModal.js"></script>
 
 
 

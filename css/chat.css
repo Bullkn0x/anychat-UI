@@ -7,15 +7,11 @@
     --font-color: white;
     --header-font-color: #6c757d;
     --secondary-font-color: #222331;
-    --hover-color:  #333333;
+
     --heading-color: #292922;
     --message-bg-other:  #E9EAF3;
     --message-bg-mine: #495057;
     --chat-top-bar-color: #2196f3;
-    --message-input-color: #343a40;
-    --input-text-color: white;
-    --menu-hover-color: #222222;
-    --menu-text-collapsed-color: white;
 }
 
 
@@ -27,15 +23,10 @@
     --font-color: #434141;
     --header-font-color: #6c757d;
     --secondary-font-color: #f9f9ff;
-    --hover-color: #c2c2c2;
     --heading-color: #b1b121;
     --message-bg-other: #2196f3;
     --message-bg-mine: #ced3d8;
     --chat-top-bar-color: #2196f3;
-    --message-input-color: #cecece;
-    --input-text-color: black;
-    --menu-hover-color: #999999;
-    --menu-text-collapsed-color: black;
 }
 /* Online list  */
 .left-right {
@@ -90,6 +81,7 @@
     height: 100%;
     margin: 0;
     padding: 0;
+    overflow: hidden;
   }
   
   ul {
@@ -137,7 +129,9 @@
     text-align: center;
     width: 400px;
   }
-  
+  .components {
+      overflow: hidden;
+  }
   .login.page .title {
     font-size: 200%;
   }
@@ -155,8 +149,8 @@
   /* Chat page */
   
 .navcontainer {
-    width: 74%;
-    margin: auto;
+    margin: auto 230px;
+    z-index: 1;
 }
 .navbar {
     background-color: var(--primary-color);
@@ -175,7 +169,7 @@
     border: none;
     width: 90%;
     font-size: 100%;
-    color: var(--input-text-color);
+    color: #ffffff;
   }
   
   .log {
@@ -184,33 +178,22 @@
     margin: 5px;
     text-align: center;
   }
-
-  .message:hover{
-    background-color: var(--hover-color);
-  }
-
-  /* padding to the each message  */
-  
-  li.message {
-    padding-left: 20px;
-    /* padding-bottom: 10px;
-    padding-top: 10px; */
-  }
   
   /* Messages */
   
   .chatArea {
     color: var(--font-color);
-    height: 86.9%;
-    margin: 4px 4px 16px 16px;
+    margin: 16px 16px 0px 16px;
+    
   }
   
   .messages {
     font-size: 150%;
     height: 100%;
     margin: 0;
-    overflow-y: scroll;
+    overflow-y: scroll !important;
     padding: 10px 20px 10px 20px;
+    
   }
   
   .message.typing .messageBody {
@@ -233,24 +216,20 @@
   /* input message box */
 .inputContainer {
   display: flex;
-  background-color: var(--message-input-color);
+  background-color: var(--primary-color) ;
   padding: 10px 0 10px 0 ;
   border-radius: 8px;
-  width: 99%;
-  margin-left: 0;
+  margin-right: 8px;
 }
 
 .inputContainer > .buttons {
   align-self: center;
   text-align: center;
-  color: white;
+  color: var(--font-color);
   width: 37px;
 }
 
-.components {
-  display: flex;
-  flex-direction: row;
-}
+
 
 .flex {
   display: flex;
@@ -264,3 +243,20 @@
  .usersOnline {
    width: 230px;
  }
+
+
+ @keyframes fadeTest {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 100%, 0);
+    }
+  
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  
+  .fadeTest {
+    animation-name: fadeTest;
+  }

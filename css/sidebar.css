@@ -11,7 +11,7 @@
 
 }
 #sidebar-container {
-    min-height: 100vh;   
+    height: 100%;   
     background-color: var(--primary-color);
     padding: 0;
 }
@@ -29,8 +29,6 @@
     height: 50px;
     color: var(--font-color);
 }
-
-
 
 /* Submenu item*/
 #sidebar-container .list-group .sidebar-submenu a {
@@ -57,15 +55,6 @@
 #sidebar-container > ul a {
     background-color: var(--secondary-color) !important;
 }
-
-span.menu-collapsed{
-    color: var(--font-color);
-}
-
-#sidebar-container > ul a:hover{
-    background-color: var(--menu-hover-color) !important;
-  }
-
 #sidebar-container > ul > li {
     color: var(--header-font-color);
 }

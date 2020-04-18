@@ -268,7 +268,6 @@
     padding: 1rem;
     background-repeat: no-repeat;
     background-position: 1rem 1.5rem;
-    background-color: var(--primary-color) !important;
     font-size: 0.8rem;
     font-family: "Open Sans", Helvetica, Arial, sans-serif;
   }

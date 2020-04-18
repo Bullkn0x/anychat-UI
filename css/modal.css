@@ -2,7 +2,6 @@
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    padding-top: 25%; /* Location of the box */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -15,13 +14,16 @@
   
   /* Modal Content */
   .modal-content {
+
     background-color: #333;
     margin: auto;
     padding: 20px;
     border: 1px solid #333;
-    width: 80%;
-    height: 80%;
-    color: grey;
+    border-radius: 35px;
+
+    width: 90%;
+    height: 90%;
+    color: var(--font-color);
   }
   
   .modal-content > p {

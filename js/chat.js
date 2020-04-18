@@ -1,3 +1,8 @@
+var socket = io.connect(null, {
+    port: 5000,
+    rememberTransport: false,
+});
+
 $(function () {
     var FADE_TIME = 150; // ms
     var TYPING_TIMER_LENGTH = 400; // ms
@@ -13,6 +18,7 @@ $(function () {
     var $window = $(window);
     var $usernameInput = $('.usernameInput'); // Input for username
     var $messages = $('.messages'); // Messages area
+    var $privateMessages = $('.chats__messages');
     var $inputMessage = $('.inputMessage'); // Input message input box
 
     var $loginPage = $('.login.page'); // The login page
@@ -28,23 +34,40 @@ $(function () {
     var currentRoom;
     var sideBarActive = false;
     // Prompt for setting a username
-    var username = 'bullkn0x';
-    var connected = true;
+    var username;
+    var connected = false;
     var typing = false;
     var lastTypingTime;
-    var $currentInput = $usernameInput.focus();
+    var $currentInput = $usernameInput;
+    var recipient_id;
+    var pm_opened = false;
+    var directMessage = false
+  
 
-    var socket = io.connect(null, {
-        port: 5000,
-        rememberTransport: false,
+
+
+    $('.chats__back').on('click', function () {
+        recipient_id = null;
+        pm_opened = false;
+        console.log(pm_opened)
+        console.log('chat closed');
     });
-
-
 
     $('input').on('click', function () {
-        $currentInput = $(this);
-        console.log($currentInput);
+        $inputMessage = $(this);
+        console.log($inputMessage);
+        if ($inputMessage.hasClass('direct-message')) {
+            directMessage = true;
+            recipient_id = $inputMessage.closest('.chats.active').attr('user_id');
+            socket.emit('pm open', { active_pm_id: recipient_id });
+            console.log(recipient_id);
+
+        } else {
+            directMessage = false;
+        }
+        console.log(directMessage);
     });
+
 
     function updateOnline(data) {
         $('#onlineUsers').append('<li>' + data.username + '</li>');
@@ -63,11 +86,9 @@ $(function () {
         socket.emit('change language', language);
     }
 
-    // Server Modal 
-    $addServerModal.on('click', function () {
-        socket.emit('query servers');
-    })
+ 
 
+    
 
     // Handle ServerList Clicks
     $(".serverList").on('click', 'a', function () {
@@ -80,26 +101,54 @@ $(function () {
         });
 
     });
+
+
+    $usersList.on('click', 'div', function () {
+        console.log('pm open');
+        pm_opened = true;
+        recipient_id = $(this).attr('user_id');
+        socket.emit('pm open', { active_pm_id: recipient_id });
+
+    });
     // Sends a chat message
     function sendMessage() {
-        console.log('send');
         var message = $inputMessage.val();
-        var roomid = $('.messages').attr('room_id');
+
+        var roomid = $messages.attr('room_id');
         console.log(roomid);
         // Prevent markup from being injected into the message
         message = cleanInput(message);
+        console.log(message);
         // if there is a non-empty message and a socket connection
         if (message && connected) {
-            $inputMessage.val('');
-            addChatMessage({
-                username: username,
-                message: message
-            });
-            // tell server to execute 'new message' and send along one parameter
-            socket.emit('new message', {
-                message: message,
-                room_id: roomid
-            });
+
+            if (directMessage) {
+                var $pmMsgBody = $('<div class="chats__message mine" />').text(message);
+                var $pmMsgDiv = $('<div class="chats__msgRow" />').append($pmMsgBody);
+                $privateMessages.append($pmMsgDiv);
+                $privateMessages[0].scrollTop = $privateMessages[0].scrollHeight;
+                socket.emit('private message', {
+                    room_id: roomid,
+                    recipient_id: recipient_id,
+                    message: message
+                });
+
+                // addPrivateMessage({
+                //     username: username,
+                //     message: message
+                // });
+            } else {
+                $inputMessage.val('');
+                addChatMessage({
+                    username: username,
+                    message: message
+                });
+                // tell server to execute 'new message' and send along one parameter
+                socket.emit('new message', {
+                    message: message,
+                    room_id: roomid
+                });
+            }
         }
     }
 
@@ -122,6 +171,7 @@ $(function () {
         var $usernameDiv = $('<span class="username"/>')
             .text(data.username)
             .css('color', '#1DB6EF');
+        //getUsernameColor(data.username)
         var $messageBodyDiv = $('<span class="messageBody">')
             .html(linkify(data.message || ' '));
 
@@ -340,31 +390,32 @@ $(function () {
     }
 
     // Gets the color of a username through our hash function
-    function getUsernameColor(username) {
-        // Compute hash code
-        var hash = 7;
-        for (var i = 0; i < username.length; i++) {
-            hash = username.charCodeAt(i) + (hash << 5) - hash;
-        }
-        // Calculate color
-        var index = Math.abs(hash % COLORS.length);
-        return COLORS[index];
-    }
+    // function getUsernameColor(username) {
+    //     // Compute hash code
+    //     var hash = 7;
+    //     for (var i = 0; i < username.length; i++) {
+    //         hash = username.charCodeAt(i) + (hash << 5) - hash;
+    //     }
+    //     // Calculate color
+    //     var index = Math.abs(hash % COLORS.length);
+    //     return COLORS[index];
+    // }
 
     // Keyboard events
 
     $window.keydown(function (event) {
-        console.log(event.target.className);
-        // Auto-focus the current input when a key is typed
-        if (!(event.ctrlKey || event.metaKey || event.altKey)) {
-            $currentInput.focus();
-        }
-        // When the client hits ENTER on their keyboard
+        // console.log(event.target.className);
+        // When the client hits ENTER on their keyboard, 13 is Enter
+
         if (event.which === 13) {
             if (username) {
-                sendMessage();
-                socket.emit('stop typing');
-                typing = false;
+                if (event.target.id == 'search-input') {
+                    console.log('searc babyyy');
+                } else {
+                    sendMessage();
+                    socket.emit('stop typing');
+                    typing = false;
+                }
             }
         }
     });
@@ -404,7 +455,7 @@ $(function () {
 
     window.addEventListener("dragleave", function (e) {
         e.preventDefault();
-        
+
         if (e.target === lastTarget || e.target === document) {
             document.querySelector("#textnode").src = null;
             document.querySelector("#dropzone").style.visibility = "hidden";
@@ -415,8 +466,8 @@ $(function () {
     dropzone.ondrop = function (e) {
         $('#textnode').hide();
 
-        $uploadModal.addClass('animated bounceIn').show();
-        
+        $uploadModal.addClass('animated fadeIn').show();
+
         // document.querySelector("#textnode").src = null;
         //     document.querySelector("#dropzone").style.visibility = "hidden";
         //     document.querySelector("#dropzone").style.opacity = 0;
@@ -532,10 +583,7 @@ $(function () {
     // Click events
 
 
-    // Focus input when clicking on the message input's border
-    $inputMessage.click(function () {
-        $inputMessage.focus();
-    });
+
 
     // Socket events
     function setUser(data) {
@@ -562,6 +610,39 @@ $(function () {
     socket.on('new message', function (data) {
         console.log(data);
         addChatMessage(data);
+    });
+
+
+    socket.on('pm log', function (data) {
+        $privateMessages.html('');
+        data.forEach(function (userMessage) {
+            if (userMessage.mymsg) {
+                var $pmMsgBody = $('<div class="chats__message mine" />').text(userMessage.message);
+                var $pmMsgDiv = $('<div class="chats__msgRow" />').append($pmMsgBody);
+                $privateMessages.append($pmMsgDiv);
+
+            } else {
+                var $pmMsgBody = $('<div class="chats__message notMine" />').text(userMessage.message);
+                var $pmMsgDiv = $('<div class="chats__msgRow" />').append($pmMsgBody);
+                $privateMessages.append($pmMsgDiv);
+
+            }
+        });
+
+    });
+    socket.on('new private message', function (data) {
+        sender_id = data.sender_id.toString();
+        console.log(recipient_id == sender_id);
+        // user has the private chat from sender open
+        if (pm_opened && recipient_id == sender_id) {
+            var $pmMsgBody = $('<div class="chats__message notMine" />').text(data.message);
+            var $pmMsgDiv = $('<div class="chats__msgRow" />').append($pmMsgBody);
+            $privateMessages.append($pmMsgDiv);
+            $privateMessages[0].scrollTop = $privateMessages[0].scrollHeight;
+
+
+            console.log(data);
+        }
     });
 
     // Whenever the server emits 'user joined', log it in the chat body
@@ -655,21 +736,7 @@ $(function () {
 
     // Server Modal Actions
 
-    // Populate the modal on Click
-    socket.on('query servers', function (data) {
-        $modalServerList.html('');
-        data.servers.forEach(function (server) {
-            $serverImg = $('<img />').attr("src", server.room_logo_url);
-            $button = $('<button class="slide"/>').append($serverImg);
-            $serverInfo = $('<div/>').css('color', '#17a2b8').html(server.room_name);
-            $buttonDiv = $('<div class ="buttons" />').append($button, $serverInfo);
-            $modalServerList.append($buttonDiv);
-
-
-            console.log(server);
-        })
-
-    });
+  
 
 });
 
