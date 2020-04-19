@@ -65,18 +65,65 @@
     <ul class="pages">
 
         <li class="chat page">
+
+
+             <!-- Create New Server Modal -->
+             <div id="newServerModal" class="modal">
+                <div class="createModal-content">
+                    <h2 >Creating a new Server? Enter a name!</h2>
+                    <form action="" class="modalForm" >
+                        <!-- method="post" -->
+                        <div class="form-group col-lg-8">
+                          <label class="col-form-label" for="serverName">Server name</label>
+                          <input type="text" class="form-control" id="serverName">
+                        </div> 
+                        
+                        <div class="form-group ">
+                          <div class="buttons container">
+                              <button id="createServerSubmit" class="btn btn-primary button-effect hvr-fade hvr-shrink createModelBtn">Create</button>
+                        </div>
+                        </div>
+                      </form>
+                </div>
+            </div>
+
             <!-- The Modal -->
             <div id="myModal" class="modal">
-
-                <!-- Modal content -->
                 <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <p>Public Hangout spots to chat out</p>
-                    
-                    <div class="joinServerList"><div class="buttons"><button class="slide"><img src="http://d1cpyz6yyb1kha.cloudfront.net/59c06463b972775e7c31ebc446d11919.png?size=128"></button><div style="color: rgb(23, 162, 184);">Boys</div></div><div class="buttons"><button class="slide"><img src="http://d1cpyz6yyb1kha.cloudfront.net/python.png"></button><div style="color: rgb(23, 162, 184);">Python</div></div><div class="buttons"><button class="slide"><img src="http://d1cpyz6yyb1kha.cloudfront.net/csgo.png"></button><div style="color: rgb(23, 162, 184);">CSGO</div></div><div class="buttons"><button class="slide"><img></button><div style="color: rgb(23, 162, 184);">Bot Testing</div></div></div>
+                    <div id="container" class="view-initial flex-col">
+                        <div id="banner-bkgrd">
+                            <div id="banner-overlay" class="expand-vertical">
+                                <header id="search-container" class="flex-column flex-center">
+                                    <input id="back-btn" type="submit" class="fa hvr-pulse-grow"
+                                            value="&#xf053;" title="Search" />
+                                    <div id="search-heading">
+                                        <h1>Find Your Community</h1>
+                                    </div>
+                                    <form id="search-form" class="flex-inline">
+                                        <input id="search-input" type="text" autocomplete="off" tabindex="1"
+                                            autocapitalize="off" autocorrect="off" name="search-query"
+                                            placeholder="I'm feeling chatty about..." />
+                                        <input id="search-clear" class="" type="button" tabindex="3" value="×">
+                                        <input id="search-btn" type="submit" tabindex="2" class="fa fa-lg"
+                                            value="&#xf002;" title="Search" />
+                                    </form>
+                                    <form class="search-options flex-row ">
+                                        <button id="searchTopServers">Browse Top</button>
+                                        <button>Have Invite Link?</button>
+                                    </form>
 
+                                </header>
+                            </div>
+                            <!--/banner-overlay-->
+                        </div>
+                        <!--/banner-->
+                        <main id="results">
+                            <div id="cards" class="flex-row flex-wrap"></div>
+                        </main>
+                        <!--/results-->
+                    </div>
+                    <!--/container-->
                 </div>
-               
             </div>
             <div class="uploadModalContainer">
                 <div class="uploadModal">
@@ -141,12 +188,21 @@
                             </li>
                             <!-- /END Separator -->
                             <!-- Menu with submenu -->
-                            <a id="addServer" href="#" class="menuItem list-group-item list-group-item-action">
+                            <a id="createServer" href="#" class="menuItem list-group-item list-group-item-action">
                                 <div class="d-flex w-100 justify-content-start align-items-center">
                                     <span class="fa fa-plus fa-fw mr-3"></span>
-                                    <span class="addServer menu-collapsed"">Add Server</span>
+                                    <span class="createServer menu-collapsed">Create a Server</span>
                                 </div>
                             </a>
+
+                            <a id="addServer" href="#" class="menuItem list-group-item list-group-item-action">
+                                <div class="d-flex w-100 justify-content-start align-items-center">
+                                    <span class="fa fa-search-plus fa-fw mr-3"></span>
+                                    <span class="addServer menu-collapsed">Server Discovery</span>
+                                </div>
+                            </a>
+
+                            
                             
                             <a href="#submenu1" data-toggle="collapse" aria-expanded="false" class="menuItem list-group-item list-group-item-action flex-column align-items-start">
                                 <div class="d-flex w-100 justify-content-start align-items-center">
@@ -157,6 +213,8 @@
                             </a>
                             <!-- Submenu content -->
                             <div id="submenu1" class="serverList sidebar-submenu collapse" style="">
+                                
+
                                 <a href="#" class="list-group-item list-group-item-action menuItem text-white" room_id="1">
                                     <img src="http://d1cpyz6yyb1kha.cloudfront.net/59c06463b972775e7c31ebc446d11919.png?size=128" style="max-height: 133%; border-radius: 16%; margin-right: 10px;">
                                     <span class="menu-collapsed">Global Chat</span>
@@ -247,10 +305,20 @@
                             <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
                             <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
                             <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
-                            <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
-                            <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
+                            <li class="message" style="display: list-item;"><div class="control-center">
+                                <div class="option-btn"></div>
+                              </div><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span></li>
+                            <li class="message" style="display: list-item;"><span class="username" style="color: rgb(211, 0, 231);">bullkn0x</span><span class="messageBody">asdfasdf</span>
+                                
+                                  
+                            </li>  
+                            
+                        
 
                         </ul>
+                        
+                        
+                          
                         <div class="inputContainer animated slideInUp delay-1s">
                             <i class="flex large material-icons buttons">add</i>
                             <input class="inputMessage flex-grow"  placeholder="Type here or drag file to upload..." />
