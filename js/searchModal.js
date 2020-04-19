@@ -46,10 +46,6 @@ $(document).ready(function () {
         }
     });
 
-    // bind window resize to manually adjust card image height, in order to maintain required aspect ratio of card images
-    $(window).resize(function () {
-        setCardImgHeight();
-    });
 
 });
 
@@ -149,9 +145,9 @@ function makeServerCard(search_results) {
         var imageDiv = encapsulate(image, "div", "class='card-image'");
         var title = encapsulate(server.room_name, "h2", "");
         var titleDiv = encapsulate(title, "div", "class='flex card-title'");
-        var action = encapsulate("More Info", "a", "room_id=" + server.room_id);
+        var action = encapsulate("More Info", "a");
         var actionDiv = encapsulate(action, "div", "class='flex card-actions'");
-        html = html + encapsulate(imageDiv + titleDiv + actionDiv, "div", "class='flex-col card'");
+        html = html + encapsulate(imageDiv + titleDiv + actionDiv, "div", "class='flex-col card' room_id=" + server.room_id );
     });
 
     return html;
@@ -168,8 +164,9 @@ function encapsulate(content, tag, attr) {
 
 
 
-// When user clicks on a server card
+// when a user clicks on a server card 
 
-$('.card').on('click', function() {
-    console.log('server');
+$('#cards').on('click','div.card', function() {
+
+    console.log('server wanted');
 });
