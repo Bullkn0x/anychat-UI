@@ -1,4 +1,4 @@
-var socket = io.connect(null, {
+var socket = io.connect('http://localhost:8000', {
     port: 5000,
     rememberTransport: false,
 });

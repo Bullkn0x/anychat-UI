@@ -168,3 +168,8 @@ function encapsulate(content, tag, attr) {
 
 
 
+// When user clicks on a server card
+
+$('.card').on('click', function() {
+    console.log('server');
+});
