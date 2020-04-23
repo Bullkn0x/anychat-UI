@@ -140,24 +140,6 @@ $('#serverIcons').on("mouseleave", "a", function() {
 
 });
 
-$('#serverIcons').on('click', 'a', function () {
-    var yPos = $(this).position().top + $(this).outerHeight() / 2
-    console.log(yPos);
-    var serverHoverDivHeight = 24
-    var divPosY = yPos - serverHoverDivHeight/2
-    var $serverHoverDiv = $('<div/>')
-        .css({
-            "position": "absolute",
-            "background-color": "red",
-            "top": divPosY + "px",
-            "left": "87px",
-            "z-index": 2,
-            "height": "24px"
-        }).text('hello')
-    $('body').append($serverHoverDiv);
-
-});
-
 
 
 // When the user clicks the button, open the modal 
