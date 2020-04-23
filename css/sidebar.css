@@ -52,10 +52,14 @@
     color: var(--font-color);
 }
 
+#sidebar-menu .list-group .sidebar-submenu a{
+    padding-left: 200px;
+}
+
 /* Submenu item*/
 #sidebar-container .list-group .sidebar-submenu a {
     height: 45px;
-    padding-left: 100px;
+    
 }
 .sidebar-submenu {
     font-size: 0.9rem;
