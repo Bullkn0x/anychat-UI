@@ -144,10 +144,81 @@ $(document).ready(function() {
         animatePathD($path, clickMidD, animTime/3, false, function() {
           curX = -80;
           finalX = 0;
-          animatePathD($path, clickD, animTime*2/3, true, function() {
-            $chat.show();
-            $chat.css("top");
-            $chat.addClass("active").attr('user_id', user_id);
+          curX = -75;
+          animatePathD($path, startD, animTime/3*2, true);
+          animating = false;
+        }, "inCubic");
+      }, sContTrans);
+      $(document).off("click", closeSidebar);
+    }
+  
+    function moveImage(that) {
+      var $img = $(that).find(".contact__photo"),
+          top = $img.offset().top - demoTop,
+          left = $img.offset().left - demoLeft,
+          $clone = $img.clone().addClass("cloned");
+  
+      $('.chats').prepend($clone);
+    }
+  
+    function ripple(elem, e) {
+      var elTop = elem.offset().top,
+          elLeft = elem.offset().left,
+          x = e.pageX - elLeft,
+          y = e.pageY - elTop;
+      var $ripple = $("<div class='ripple'></div>");
+      $ripple.css({top: y, left: x});
+      elem.append($ripple);
+    }
+  
+    $(document).on("click", ".contact", function(e) {
+      var that = this,
+          name = $(this).find(".contact__name").text(),
+          online = $(this).find(".contact__status").hasClass("online");
+          user_id = $(this).attr('user_id');
+    
+    console.log(user_id);
+      $(".chats__name").text(name);
+      $(".chats__online");
+      if (online) $(".chats__online").addClass("active");
+      ripple($(that),e);
+      setTimeout(function() {
+        $sCont.removeClass("active");
+        finalX = -80;
+        setTimeout(function() {
+          $(".ripple").remove();
+          animatePathD($path, clickMidD, animTime/3, false, function() {
+            curX = -80;
+            finalX = 0;
+            animatePathD($path, clickD, animTime*2/3, true, function() {
+              $chat.show();
+              $chat.css("top");
+              $chat.addClass("active").attr('user_id', user_id);
+              animating = false;
+              if ($('div.chats.active > img').length){
+                $('div.chats.active > img').remove(); 
+              }
+              moveImage(that);
+            });
+          }, "inCubic");
+        }, sContTrans);
+      }, sContTrans);
+    });
+  
+    $(document).on("click", ".chats__back", function() {
+      if (animating) return;
+      animating = true;
+      $chat.removeClass("active");
+      $(".cloned").addClass("removed");
+      setTimeout(function() {
+        $(".cloned").remove();
+        $chat.hide();
+        animatePathD($path, clickMidDRev, animTime/3, false, function() {
+          curX = 100;
+          finalX = 0;
+          animatePathD($path, finalD, animTime*2/3, true, function() {
+            $sCont.addClass("active");
+            $(document).on("click", closeSidebar);
             animating = false;
             if ($('div.chats.active > img').length){
               $('div.chats.active > img').remove(); 

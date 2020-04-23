@@ -30,10 +30,10 @@
     overflow-y: scroll;
 }
 
+
 #serverIcons img {
     width: 80%;
-    align-self: center;
-    margin-top: 14px;
+    margin: 7px;
     border-radius: 50%;
     border: solid;
     border-color: #13b0da;
@@ -50,10 +50,6 @@
 #sidebar-container .list-group a {
     height: 50px;
     color: var(--font-color);
-}
-
-#sidebar-menu .list-group .sidebar-submenu a{
-    padding-left: 200px;
 }
 
 /* Submenu item*/
@@ -106,3 +102,4 @@
   text-align: right;
   padding-left: 10px;
 }
+

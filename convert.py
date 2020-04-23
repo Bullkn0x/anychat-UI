@@ -1,5 +1,5 @@
-import os
 
+import os
 with open('chat.html','r') as f:
     with open('out.html', 'w') as out:
 
@@ -26,6 +26,11 @@ with open('chat.html','r') as f:
                     html= f'<script src="./{file}""></script>'
                     out.write(html + '\n')
                     
+
+
+
+
+                
             else:
                 out.write(line)
                     
