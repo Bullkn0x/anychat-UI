@@ -1,6 +1,5 @@
 
-res = ''
-
+import os
 with open('chat.html','r') as f:
     with open('out.html', 'w') as out:
 
@@ -40,3 +39,5 @@ with open('chat.html','r') as f:
 with open('out.html', 'r') as temp:
     with open('chat.html','w') as f:
         f.write(''.join(temp.readlines()))
+
+os.remove("out.html")
