@@ -230,6 +230,8 @@
     left: 2.5rem;
     padding-right: 2.5rem;
     overflow-y: auto;
+    /* CHANGE */
+    height: 87%;
   }
   .chats__msgRow {
     margin-bottom: 0.5rem;
@@ -268,7 +270,6 @@
     padding: 1rem;
     background-repeat: no-repeat;
     background-position: 1rem 1.5rem;
-    background-color: var(--primary-color) !important;
     font-size: 0.8rem;
     font-family: "Open Sans", Helvetica, Arial, sans-serif;
   }
