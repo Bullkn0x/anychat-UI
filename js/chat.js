@@ -27,6 +27,7 @@ $(function () {
     var $onlineNumber = $('.online span');
     var $languagePref = $('#language');
     var $serverList = $('.serverList');
+    var $serverIconList = $('#serverIcons');
     var $usersList = $('.sidebar-content');
     var $addServerModal = $('#addServer');
     var $uploadModal = $('.uploadModalContainer')
@@ -49,17 +50,18 @@ $(function () {
     $('.chats__back').on('click', function () {
         recipient_id = null;
         pm_opened = false;
+        socket.emit('pm status', { active_pm_id: null});
+
         console.log(pm_opened)
         console.log('chat closed');
     });
-
+    
     $('input').on('click', function () {
         $inputMessage = $(this);
         console.log($inputMessage);
         if ($inputMessage.hasClass('direct-message')) {
             directMessage = true;
             recipient_id = $inputMessage.closest('.chats.active').attr('user_id');
-            socket.emit('pm open', { active_pm_id: recipient_id });
             console.log(recipient_id);
 
         } else {
@@ -104,10 +106,9 @@ $(function () {
 
 
     $usersList.on('click', 'div', function () {
-        console.log('pm open');
         pm_opened = true;
         recipient_id = $(this).attr('user_id');
-        socket.emit('pm open', { active_pm_id: recipient_id });
+        socket.emit('pm status', { active_pm_id: recipient_id });
 
     });
     // Sends a chat message
@@ -121,6 +122,7 @@ $(function () {
         console.log(message);
         // if there is a non-empty message and a socket connection
         if (message && connected) {
+            $inputMessage.val('');
 
             if (directMessage) {
                 var $pmMsgBody = $('<div class="chats__message mine" />').text(message);
@@ -133,12 +135,9 @@ $(function () {
                     message: message
                 });
 
-                // addPrivateMessage({
-                //     username: username,
-                //     message: message
-                // });
+
+              
             } else {
-                $inputMessage.val('');
                 addChatMessage({
                     username: username,
                     message: message
@@ -411,6 +410,8 @@ $(function () {
             if (username) {
                 if (event.target.id == 'search-input') {
                     console.log('searc babyyy');
+                } else if (event.target.id =='serverName') {
+                    console.log('Your Social Security Number is being tracked!');
                 } else {
                     sendMessage();
                     socket.emit('stop typing');
@@ -685,6 +686,7 @@ $(function () {
         console.log(data);
         $serverList.html('');
         $usersList.html('');
+        $serverIconList.html('');
         data.server_list.forEach(function (server) {
             var $imgDiv = $('<img />').attr("src", server.room_logo_url).css({
                 "max-height": "133%",
@@ -694,8 +696,10 @@ $(function () {
 
             var $serverNameDiv = $('<span class="menu-collapsed"/>')
                 .text(server.room_name);
-            var $tableCellDiv = $('<a href="#" class="list-group-item list-group-item-action bg-dark text-white">').append($imgDiv).append($serverNameDiv);
+            var $tableCellDiv = $('<a href="#" class="list-group-item your-server list-group-item-action bg-dark">').append($imgDiv).append($serverNameDiv);
             $serverList.append($tableCellDiv.attr('room_id', server.room_id));
+
+            $serverIconList.append($('<img/>').attr('src' ,server.room_logo_url));
         });
 
         data.server_users.forEach(function (user) {
@@ -709,6 +713,8 @@ $(function () {
             $usersList.append($userDiv);
         });
     });
+
+
 
     // Whenever the server emits 'user left', log it in the chat body
     socket.on('user left', function (data) {
