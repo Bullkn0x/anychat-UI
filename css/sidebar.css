@@ -29,6 +29,12 @@
     overflow-y: scroll;
 }
 
+a#tempHover:before {
+    transform: translateX(-10px);
+    border-color: transparent var(--heading-color) transparent transparent;
+    border-width: 10px 10px 10px 5px;
+}
+
 
 #serverIcons img {
     width: 80%;

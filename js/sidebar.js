@@ -84,7 +84,10 @@ socket.on('server info', function (data) {
             .append($imgDiv, $serverNameDiv);
         $serverList.append($tableCellDiv);
 
-        $serverIconList.append($('<a/>').attr({ 'room_id': server.room_id, 'room_name': server.room_name }).append($serverIcon));
+        $serverIconList.append($('<a/>')
+            .attr({ 'room_id': server.room_id, 'room_name': server.room_name })
+
+            .append($serverIcon));
     });
 });
 
@@ -117,25 +120,32 @@ $serverIconList.on('click', 'a', function () {
 
 
 
-$('#serverIcons').on("mouseenter", "a", function() {
+$('#serverIcons').on("mouseenter", "a", function () {
     var yPos = $(this).position().top + $(this).outerHeight() / 2
-    console.log(yPos);
+    console.log('icon center',yPos);
     var serverHoverDivHeight = 24
-    var divPosY = yPos - serverHoverDivHeight/2
-    var $serverHoverDiv = $('<div/>')
-        .attr('id','tempHover')
+    var divPosY = yPos - serverHoverDivHeight / 2
+    console.log('icon center',divPosY)
+    var $serverHoverDiv = $('<a/>')
+        .addClass('hvr-bubble-left')
+        .attr('id', 'tempHover')
         .css({
+            "padding": "3px 9px",
             "position": "absolute",
-            "background-color": "red",
+            "background-color": "var(--heading-color)",
+            "color": "var(--font-color)",
             "top": divPosY + "px",
             "left": "87px",
             "z-index": 2,
-            "height": "24px"
+            "border-radius" :"4px",
+            "box-shadow":"3px 4px 6px 0px rgba(0,0,0,0.75)"
         }).text($(this).attr('room_name'))
+
+        console.log($serverHoverDiv.outerHeight())
     $('body').append($serverHoverDiv);
 });
 
-$('#serverIcons').on("mouseleave", "a", function() {
+$('#serverIcons').on("mouseleave", "a", function () {
     $('#tempHover').remove();
 
 });
