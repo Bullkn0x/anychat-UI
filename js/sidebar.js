@@ -45,7 +45,7 @@ function SidebarCollapse() {
     }
 
     // Collapse/Expand icon
-    $('#collapse-icon').toggleClass('fa-angle-double-left fa-angle-double-right');
+    $('#collapse-icon').toggleClass('fa fa-angle-double-left fas fa-angle-double-right');
 }
 
 socket.on('new server', function (server) {
@@ -65,7 +65,6 @@ socket.on('new server', function (server) {
 });
 
 socket.on('server info', function (data) {
-    console.log(data);
     $serverList.html('');
     $serverIconList.html('');
     data.server_list.forEach(function (server) {
@@ -122,10 +121,8 @@ $serverIconList.on('click', 'a', function () {
 
 $('#serverIcons').on("mouseenter", "a", function () {
     var yPos = $(this).position().top + $(this).outerHeight() / 2
-    console.log('icon center',yPos);
     var serverHoverDivHeight = 24
     var divPosY = yPos - serverHoverDivHeight / 2
-    console.log('icon center',divPosY)
     var $serverHoverDiv = $('<a/>')
         .addClass('hvr-bubble-left')
         .attr('id', 'tempHover')
@@ -141,7 +138,6 @@ $('#serverIcons').on("mouseenter", "a", function () {
             "box-shadow":"3px 4px 6px 0px rgba(0,0,0,0.75)"
         }).text($(this).attr('room_name'))
 
-        console.log($serverHoverDiv.outerHeight())
     $('body').append($serverHoverDiv);
 });
 
