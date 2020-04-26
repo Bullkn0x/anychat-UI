@@ -1,12 +1,13 @@
-
 // Selectors
 var $serverList = $('.serverList');
 var $serverIconList = $('#serverIcons');
+
 //  Modals
 var $discoverModal = $("#discoverModal");
 var $createModal = $("#newServerModal");
 var $leaveModal = $("#leaveConfirmModal");
 var $serverOptionModal = $("serverOptionModal");
+var $deleteConfirmModal = $("#deleteConfirmModal");
 
 // Side Menu Selector for modals
 var $discoverBtn = $("#discoverServer");
@@ -45,10 +46,11 @@ function SidebarCollapse() {
     }
 
     // Collapse/Expand icon
-    $('#collapse-icon').toggleClass('fa-angle-double-left fa-angle-double-right');
+    $('#collapse-icon').toggleClass('fa fa-angle-double-left fas fa-angle-double-right');
 }
 
 socket.on('new server', function (server) {
+    var $serverIcon = $('<img />').attr("src", server.room_logo_url);
 
     var $imgDiv = $('<img />').attr("src", server.room_logo_url).css({
         "max-height": "133%",
@@ -60,21 +62,30 @@ socket.on('new server', function (server) {
         .text(server.room_name);
     var $tableCellDiv = $('<a href="#" class="list-group-item list-group-item-action bg-dark">').attr('room_id', server.room_id).append($imgDiv).append($serverNameDiv);
     $serverList.append($tableCellDiv);
+    $serverIconList.append($('<a/>')
+        .attr({ 'room_id': server.room_id, 'room_name': server.room_name })
+
+        .append($serverIcon
+            .css({
+                "border-color": server.color
+            })
+        ));
     $tableCellDiv.click();
 
 });
 
 socket.on('server info', function (data) {
-    console.log(data);
     $serverList.html('');
     $serverIconList.html('');
     data.server_list.forEach(function (server) {
+        console.log(server.color)
         var $serverIcon = $('<img />').attr("src", server.room_logo_url);
         var $imgDiv = $('<img />').attr("src", server.room_logo_url)
             .css({
                 "max-height": "133%",
                 "border-radius": "16%",
                 "margin-right": "10px",
+                "border-color": server.color
             });
         var $serverNameDiv = $('<span class="menu-collapsed"/>')
             .text(server.room_name);
@@ -84,7 +95,14 @@ socket.on('server info', function (data) {
             .append($imgDiv, $serverNameDiv);
         $serverList.append($tableCellDiv);
 
-        $serverIconList.append($('<a/>').attr({ 'room_id': server.room_id, 'room_name': server.room_name }).append($serverIcon));
+        $serverIconList.append($('<a/>')
+            .attr({ 'room_id': server.room_id, 'room_name': server.room_name })
+
+            .append($serverIcon
+                .css({
+                    "border-color": server.color
+                })
+            ));
     });
 });
 
@@ -117,25 +135,29 @@ $serverIconList.on('click', 'a', function () {
 
 
 
-$('#serverIcons').on("mouseenter", "a", function() {
+$('#serverIcons').on("mouseenter", "a", function () {
     var yPos = $(this).position().top + $(this).outerHeight() / 2
-    console.log(yPos);
     var serverHoverDivHeight = 24
-    var divPosY = yPos - serverHoverDivHeight/2
-    var $serverHoverDiv = $('<div/>')
-        .attr('id','tempHover')
+    var divPosY = yPos - serverHoverDivHeight / 2
+    var $serverHoverDiv = $('<a/>')
+        .addClass('hvr-bubble-left')
+        .attr('id', 'tempHover')
         .css({
+            "padding": "3px 9px",
             "position": "absolute",
-            "background-color": "red",
+            "background-color": "var(--heading-color)",
+            "color": "var(--font-color)",
             "top": divPosY + "px",
             "left": "87px",
             "z-index": 2,
-            "height": "24px"
+            "border-radius": "4px",
+            "box-shadow": "3px 4px 6px 0px rgba(0,0,0,0.75)"
         }).text($(this).attr('room_name'))
+
     $('body').append($serverHoverDiv);
 });
 
-$('#serverIcons').on("mouseleave", "a", function() {
+$('#serverIcons').on("mouseleave", "a", function () {
     $('#tempHover').remove();
 
 });
@@ -151,8 +173,9 @@ $discoverBtn.on('click', function () {
 
 //Leave Server Modal AREA ------------
 //Temp button to bring up the modal
+
 $helpBtn.on('click', function () {
-    $leaveModal.css('display', 'flex');
+    $deleteConfirmModal.css('display', 'flex');
 });
 
 //When right click on all the servers on the serverList... Do something HERE...
