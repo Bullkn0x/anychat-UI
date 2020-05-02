@@ -1,0 +1,9 @@
+<svg id="Livello_1" data-name="Livello 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 253.26 214.26"><defs>
+<style>.cls-1{fill:#191656;}.cls-2{fill:url(#linear-gradient);}.cls-3{fill:url(#linear-gradient-2);}.cls-4{opacity:0.3;fill:url(#linear-gradient-3);}</style>
+<linearGradient id="linear-gradient" x1="44.22" y1="133.91" x2="221.12" y2="133.91" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#5874fe"/><stop offset="1" stop-color="#12b5fc"/>
+</linearGradient><linearGradient id="linear-gradient-2" x1="49.73" y1="4.59" x2="171.18" y2="101.36" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#05c8fb"/><stop offset="1" stop-color="#47e7f3" stop-opacity="0.5"/>
+</linearGradient><linearGradient id="linear-gradient-3" x1="173.13" y1="107.87" x2="51.41" y2="120.06" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#191656" stop-opacity="0.5"/><stop offset="1" stop-color="#191656" stop-opacity="0"/>
+</linearGradient></defs><title>anychat final-3</title>
+<path class="cls-2" d="M80.27,53.57,33.25,135A17.12,17.12,0,0,0,48.07,160.7h94.06l30.92,53.56,78-135a17.11,17.11,0,0,0-14.82-25.67Z"/>
+<path class="cls-3" d="M39.47,17.12,2.32,81.46a17.11,17.11,0,0,0,14.82,25.67H173.05l47-81.46A17.11,17.11,0,0,0,205.26,0H69.11A34.2,34.2,0,0,0,39.47,17.12Z"/>
+<polygon class="cls-4" points="173.05 107.13 33.24 135.02 49.35 107.13 173.05 107.13"/></svg>
