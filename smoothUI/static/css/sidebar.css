@@ -11,6 +11,11 @@
 
 }
 
+
+
+.side-nav .side-menu__title {
+    color: var(--font-color);
+}
 .serverList {
     height: 150px !important;
     overflow-y: scroll;
@@ -23,12 +28,16 @@
 
 
 #serverIcons {
-    background-color: var(--heading-color);
+    background-color: var(--secondary-color);
     position: relative;
     width: 80px;
     overflow-y: scroll;
     min-width: 80px;
     
+}
+
+#serverIcons a {
+    display: flex;
 }
 
 a#tempHover:before {
@@ -54,6 +63,10 @@ a#tempHover:before {
 .sidebar-collapsed {
     width: 60px;
 }
+
+
+
+
 
 /* Menu item*/
 #sidebar-container .list-group a {

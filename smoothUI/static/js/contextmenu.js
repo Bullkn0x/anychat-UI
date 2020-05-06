@@ -321,7 +321,7 @@ $(function () {
     // Listeners  
 
     // Message Right Click 
-    $('.chatArea').on("contextmenu", ".message", function (e) {
+    $('.componentMount').on("contextmenu", ".message", function (e) {
         focusedMessageContent = $(this)
         openContextMenu($chatContextMenu, e);
     });

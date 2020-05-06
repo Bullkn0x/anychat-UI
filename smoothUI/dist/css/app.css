@@ -6405,6 +6405,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 }
 
 .top-bar {
+    padding-right: 22px;
   height: 67px;
   z-index: 51;
   display: flex;
@@ -6412,6 +6413,8 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
   position: relative;
   border-bottom-width: 1px;
   border-color: #dee7ef;
+  flex-shrink: 0;
+
 }
 
 .app {
@@ -6928,9 +6931,10 @@ body {
 
 .content {
   border-radius: 30px;
-  padding: 0px 22px;
+  padding-left: 22px;
   background-color: #F1F5F8;
   flex: 1 1 0%;
+  overflow: hidden;
 }
 
 @media (max-width: 767px) {
@@ -8117,11 +8121,12 @@ body {
 }
 
 .side-nav .side-nav__devider {
-  width: 100%;
+  width: 95%;
   height: 1px;
-  background-color: #2e51bb;
+  background-color: var(--chat-top-bar-color);;
   z-index: 10;
   position: relative;
+  margin-inline-start: auto;
 }
 
 .side-nav .side-menu {
@@ -10218,7 +10223,7 @@ body {
 }
 
 .side-nav > ul > li > .side-menu:hover:not(.side-menu--active):not(.side-menu--open) .side-menu__icon:before {
-  background-color: #3151BC;
+  background-color: var(--secondary-color);
 }
 
 @-webkit-keyframes intro-devider-animation {
@@ -10307,7 +10312,7 @@ body {
 }
 
 .breadcrumb .breadcrumb--active {
-  color: #1C3FAA;
+  color: var(--chat-top-bar-color);
   font-weight: 500;
 }
 

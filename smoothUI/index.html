@@ -7,10 +7,8 @@
     <meta charset="utf-8">
     <link href="dist/images/justlogo.svg" rel="shortcut icon">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description"
-        content="Goodbye Slack. Hello Anychat.">
-    <meta name="keywords"
-        content="Slack, Translate, Workspace, Chat, Messenger">
+    <meta name="description" content="Goodbye Slack. Hello Anychat.">
+    <meta name="keywords" content="Slack, Translate, Workspace, Chat, Messenger">
     <meta name="author" content="LEFT4CODE">
     <title>AnyChat.io</title>
     <!-- BEGIN: CSS Assets-->
@@ -26,6 +24,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@2.12.1/dist/index.min.js"></script>
     <!-- nav Animation -->
     <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" data-auto-replace-svg="nest"></script>
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
 
     <!-- Side Bar -->
@@ -34,18 +34,17 @@
     <link rel="stylesheet" href="static/css/chat.css">
 
     <link rel="stylesheet" href="static/css/sidebar.css">
-    <link rel="stylesheet" href=".static/css/userlist.css">
+    <link rel="stylesheet" href="static/css/userlist.css">
     <link rel="stylesheet" href="static/css/filebox.css">
     <link rel="stylesheet" href="static/css/modal.css">
-    <link rel="stylesheet" href=".static/css/uploadModal.css">
-    <link rel="stylesheet" href=".static/css/themeToggler.css">
+    <link rel="stylesheet" href="static/css/uploadModal.css">
+    <link rel="stylesheet" href="static/css/themeToggler.css">
     <!-- <link rel="stylesheet" href=".static/css/tools.css"> -->
-    <link rel="stylesheet" href=".static/css/topnav.css">
-    <link rel="stylesheet" href=".static/css/searchModal.css">
-    <link rel="stylesheet" href=".static/css/hover-min.css">
-    <link rel="stylesheet" href=".static/css/buttons.css">
+    <link rel="stylesheet" href="static/css/searchModal.css">
+    <link rel="stylesheet" href="static/css/hover-min.css">
+    <link rel="stylesheet" href="static/css/buttons.css">
     <link rel="stylesheet" href="static/css/contextmenu.css">
-    <link rel="stylesheet" href=".static/css/emojis.css">
+    <link rel="stylesheet" href="static/css/emojis.css">
     <!-- END: CSS Assets-->
 </head>
 <!-- END: Head -->
@@ -58,6 +57,142 @@ padding-right: 2rem;
     <div style="visibility:hidden; opacity:0" id="dropzone">
         <img id="textnode"></img>
     </div>
+
+            <!-- Create New Server Modal -->
+            <div id="newServerModal" class="modal">
+                <div class="modal-content">
+
+                    <h2>Creating a new Server? Enter a name!</h2>
+                    <form class="flex-row serverOptions">
+                        <div class="form-group flex-col">
+                            <label for="serverName">Server name</label>
+                            <input type="text" class="form-control" id="serverName">
+
+                        </div>
+                        <div class="flex-row privateSelect">
+                            <label>Private Server</label>
+                            <input type="checkbox" id="_checkbox">
+                            <label class="_checkbox" for="_checkbox">
+                                <div id="tick_mark"></div>
+                            </label>
+                        </div>
+                    </form>
+                    <div class="container">
+                        <button type="button" id="createServerSubmit"
+                            class="btn btn-primary hvr-fade hvr-shrink createModelBtn">Create</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Server Option Modal  -->
+            <div id="serverOptionModal" class="modal">
+                <div class="serverOptionModal-content">
+                    <button type="button" class="btn btn-outline-danger">Danger</button>
+                </div>
+            </div>
+
+            <div id="deleteConfirmModal" class="modal">
+                <div class="modal-content">
+                    <h4 class="text-center">Are you sure you want to delete the server '<span id='deleteServerName'></span>'?</h4>
+                    <h6 class="text-center">This cannot be undone, please type <i>delete me</i> in the field.</h6>
+                    <form class="d-flex flex-row justify-content-center serverOptions ">
+                        <div class="form-group flex-col">
+                            <input type="text" class="form-control" id="deleteMe">
+                        </div>
+                    </form>
+                    <div class="flex justify-content-around">
+                        <button id="cancelDelete" type="button" class="btn btn-secondary">Cancel</button>
+                        <button id="confirmDelete" type="button" class="btn btn-danger">Delete Me</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- changepassword modal -->
+            <div id="changePasswordModal" class="modal">
+                <div class="modal-content">
+                    <h4 class="text-center">To change your password, enter your old password then new password</h4>
+                    <form class="user-form serverOptions ">
+                        <div class="input-field form-group flex-col">
+                            <input type="text" class="form-control" placeholder="Current Password" id="oldPassword">
+                        </div>
+                        <div class="input-field form-group flex-col">
+                            <input type="text" class="form-control" placeholder="New Password" id="newPassword">
+                        </div>
+                    </form>
+                    <div class="flex justify-content-around">
+                        <button id="confirmChangePassword" type="button" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leave Confirmation Modal -->
+            <div id="leaveConfirmModal" class="modal">
+                <div class="leaveConfirmModal-content modal-content">
+                    <h4 class="text-center">Are you sure you want to leave the server '<span id='leaveServerName'></span>'?</h4>
+                    <div class="flex justify-content-around">
+                        <button id="cancelLeave" type="button" class="btn btn-secondary">Cancel</button>
+                        <button id="confirmLeave" type="button" class="btn btn-danger">Confirm Leave</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Modal -->
+            <div id="discoverModal" class="modal">
+                <div class="modal-content">
+                    <div id="container" class="view-initial flex-col">
+                        <div id="banner-bkgrd">
+                            <div id="banner-overlay" class="expand-vertical">
+                                <header id="search-container" class="flex-column flex-center">
+                                    <input id="back-btn" type="submit" class="fa hvr-pulse-grow" value="&#xf053;"
+                                        title="Search" />
+                                    <div id="search-heading">
+                                        <h1>Find Your Community</h1>
+                                    </div>
+                                    <form id="search-form" class="flex-inline">
+                                        <input id="search-input" type="text" autocomplete="off" tabindex="1"
+                                            autocapitalize="off" autocorrect="off" name="search-query"
+                                            placeholder="I'm feeling chatty about..." />
+                                        <input id="search-clear" class="" type="button" tabindex="3" value="×">
+                                        <input id="search-btn" type="submit" tabindex="2" class="fa fa-lg"
+                                            value="&#xf002;" title="Search" />
+                                    </form>
+                                    <form class="search-options flex-row ">
+                                        <button id="searchTopServers">Browse Top</button>
+                                        <button>Have Invite Link?</button>
+                                    </form>
+
+                                </header>
+                            </div>
+                            <!--/banner-overlay-->
+                        </div>
+                        <!--/banner-->
+                        <main id="results">
+                            <div id="cards" class="flex-row flex-wrap"></div>
+                        </main>
+                        <!--/results-->
+                    </div>
+                    <!--/container-->
+                </div>
+            </div>
+
+            <!-- uploadModal -->
+            <div class="uploadModalContainer">
+                <div class="uploadModal">
+
+                    <div class="info flex-grow">
+                        <p>Add Message? (OPTIONAL)</p>
+                        <input class="uploadMessage" placeholder="Well, well, what is this file here... ">
+                    </div>
+                    <div class="actions ">
+
+                        <button class="btn btn-secondary" type="submit flex">Cancel</button>
+                        <button id="upload" class="btn btn-success" type="submit flex">Upload</button>
+
+                    </div>
+                </div>
+            </div>
+
 
     <!-- BEGIN: Mobile Menu -->
     <div class="mobile-menu md:hidden">
@@ -530,17 +665,18 @@ padding-right: 2rem;
         <nav class="side-nav">
             <a href="" class="intro-x flex items-center pl-5 pt-4">
                 <img alt="Midone Tailwind HTML Admin Template" class="w-6" src="dist/images/justlogo.svg">
-                <span class="hidden xl:block text-white text-lg ml-3"> Any<span class="font-medium">chat</span> </span>
+                <span class="hidden xl:block text-white text-lg ml-3 brandName"> Any<span
+                        class="font-medium">chat</span> </span>
             </a>
             <div class="side-nav__devider my-6"></div>
             <ul id="routes">
                 <li>
                     <a href="index.html" class="side-menu side-menu--active">
                         <div class="side-menu__icon"> <i data-feather="home"></i> </div>
-                        <div class="side-menu__title"> Dashboard </div>
+                        <div class="side-menu__title"> Channel Chat </div>
                     </a>
                 </li>
-            
+
                 <li>
                     <a href="side-menu-inbox.html" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="inbox"></i> </div>
@@ -548,7 +684,7 @@ padding-right: 2rem;
                     </a>
                 </li>
                 <li>
-                    <a id="fileManager"  class="side-menu">
+                    <a id="fileManager" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="hard-drive"></i> </div>
                         <div class="side-menu__title"> File Manager </div>
                     </a>
@@ -559,7 +695,7 @@ padding-right: 2rem;
                         <div class="side-menu__title"> Messenger</div>
                     </a>
                 </li>
-             
+
                 <li>
                     <a href="javascript:;" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="edit"></i> </div>
@@ -784,9 +920,23 @@ padding-right: 2rem;
                                 <div class="side-menu__title"> Error Page </div>
                             </a>
                         </li>
+
+
                     </ul>
                 </li>
+
+                <li>
+                    <a id="menuCollapse" class="side-menu">
+                        <div class="side-menu__icon"> <i data-feather="arrow-left"></i> </div>
+                        <div class="side-menu__title"> <b>Collapse</b></div>
+                    </a>
+                </li>
                 <li class="side-nav__devider my-6"></li>
+
+                <div class="toggle toggle--daynight animated fadeIn delay-2s">
+                    <input type="checkbox" id="toggle--daynight" class="toggle--checkbox">
+                    <label class="toggle--btn" for="toggle--daynight"><span class="toggle--feature"></span></label>
+                </div>
 
 
 
@@ -800,7 +950,7 @@ padding-right: 2rem;
                 <!-- BEGIN: Breadcrumb -->
                 <div class="-intro-x breadcrumb mr-auto hidden sm:flex"> <a href="" class="">AnyChat</a> <i
                         data-feather="chevron-right" class="breadcrumb__icon"></i> <a id="componentTitle" href=""
-                        class="breadcrumb--active">Dashboard</a> </div>
+                        class="breadcrumb--active">Channel Chat</a> </div>
                 <!-- END: Breadcrumb -->
                 <!-- BEGIN: Search -->
                 <div class="intro-x relative mr-3 sm:mr-6">
@@ -809,6 +959,7 @@ padding-right: 2rem;
                         <i data-feather="search" class="search__icon"></i>
                     </div>
                     <a class="notification sm:hidden" href=""> <i data-feather="search" class="notification__icon"></i>
+
                     </a>
                     <div class="search-result">
                         <div class="search-result__content">
@@ -1014,6 +1165,10 @@ padding-right: 2rem;
                         </div>
                     </div>
                 </div>
+
+                <div class="intro-x relative mr-3 sm:mr-6 ">
+                    <a class="cursor-pointer userListToggle"><i data-feather="users" class="notification__icon"></i></a>
+                </div>
                 <!-- END: Notifications -->
                 <!-- BEGIN: Account Menu -->
                 <div class="intro-x dropdown w-8 h-8 relative">
@@ -1040,6 +1195,7 @@ padding-right: 2rem;
                                     class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 rounded-md">
                                     <i data-feather="help-circle" class="w-4 h-4 mr-2"></i> Help </a>
                             </div>
+
                             <div class="p-2 border-t border-theme-40">
                                 <a href=""
                                     class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 rounded-md">
@@ -1051,16 +1207,55 @@ padding-right: 2rem;
                 <!-- END: Account Menu -->
             </div>
             <!-- END: Top Bar -->
+
+            <!-- component area -->
             <div class="componentMount flex-grow flex-col">
-                <ul class="flex-grow messages animated fadeIn delay-2s" room_id="25">
-                   
-                </ul>
-                <div class="inhold animated slideInUp delay-1s">
-                    <div class="flex inputContainer" style="margin-bottom: 20px;">
-                        <i class="flex large material-icons buttons">add</i>
-                        <input class="inputMessage chat-message flex-grow"
-                            placeholder="Type here or drag file to upload...">
-                        <i class="flex large material-icons buttons emojiZone">insert_emoticon</i>
+                <div class="flex-row" style="flex-grow: 1; height: 100%; display: flex;">
+                    <div class="flex-grow flex-col"  style="display: flex;">
+                        <ul class="flex-grow messages animated fadeIn delay-2s" room_id="25">
+                        </ul>
+                        <div class="inhold animated slideInUp delay-1s">
+                            <div class="flex inputContainer" style="margin-bottom: 20px;">
+                                <i class="flex large material-icons buttons">add</i>
+                                <input class="inputMessage chat-message flex-grow"
+                                    placeholder="Type here or drag file to upload...">
+                                <i class="flex large material-icons buttons emojiZone">insert_emoticon</i>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="flex usersOnline">
+                        <div class="sidebar-content">
+
+
+                        </div>
+                        <div class="chats">
+                            <span class="chats__back"></span>
+                            <span class="chats__status">status</span>
+                            <div class="chats__person">
+                                <span class="chats__online active"></span>
+                                <span class="chats__name">Huehue Huehue</span>
+                            </div>
+                            <div class="chats__messages">
+                                <div class="chats__msgRow">
+                                    <div class="chats__message mine">Bro WHATTUP</div>
+                                </div>
+                                <div class="chats__msgRow">
+                                    <div class="chats__message notMine">Wow!</div>
+                                </div>
+                                <div class="chats__msgRow">
+                                    <div class="chats__message notMine">YOOO</div>
+                                </div>
+
+                            </div>
+                            <div class="inputContainer chats__input">
+                                <i class="flex large material-icons buttons">add</i>
+                                <input class="inputMessage direct-message flex-grow"
+                                    placeholder="Type here or drag file to upload...">
+                                <i class="flex large material-icons buttons emojiZone">insert_emoticon</i>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1074,11 +1269,10 @@ padding-right: 2rem;
     </div>
 
     <script>
-      
+
     </script>
     <!-- BEGIN: JS Assets-->
-    <script
-        src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
     <script src="dist/js/app.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=[" your-google-map-api"]&libraries=places"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" crossorigin="anonymous"></script>
@@ -1087,11 +1281,11 @@ padding-right: 2rem;
     <script src="static/js/chat.js"></script>
     <script src="static/js/routes.js"></script>
 
-<script src=" static/js/sidebar.js"></script>
-    <!-- <script src="static/js/userlist.js""></script> -->
-<script src="static/js/modal.js"></script>
+    <script src="static/js/sidebar.js"></script>
+    <script src="static/js/userlist.js""></script>
+    <script src=" static/js/modal.js"></script>
     <script src="static/js/themeToggler.js""></script>
-<script src=" static/js/searchModal.js""></script>
+<script src="static/js/searchModal.js""></script>
     <script src="static/js/contextmenu.js""></script>
         <!-- END: JS Assets-->
     </body>

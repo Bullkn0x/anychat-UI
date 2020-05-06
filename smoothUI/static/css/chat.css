@@ -102,8 +102,12 @@
   /* Pages */
   
 
+  .brandName {
+    color: var(--font-color);
+  }
 .componentMount {
     display: flex;
+    overflow: hidden;
 }
 
   .pages {
@@ -194,6 +198,7 @@
   }
   
   .message:hover{
+    border-radius: 12px;
     background-color: var(--hover-color);
     
   }
@@ -228,11 +233,8 @@
   /* padding to the each message  */
 
   li.message {
-    padding-left: 20px;
+    padding: 10px 0 10px 20px;
     display: flex;
-    margin-bottom: 22px;
-    /* padding-bottom: 10px;
-    padding-top: 10px; */
   }
   .messageContentContainer {
     padding-left: 15px;
@@ -282,6 +284,11 @@
 
 
 
+.componentWrapper {
+    padding-right: 22px;
+    margin-bottom: 22px;
+
+}
 .flex {
   display: flex;
   justify-content: space-between;
@@ -292,7 +299,7 @@
  }
 
  .usersOnline {
-   width: 230px;
+   min-width: 230px;
  }
 
 

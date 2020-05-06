@@ -15,6 +15,8 @@ var $createBtn = $("#createServer");
 var $helpBtn = $("#help");
 
 
+var $notificationBubble =  '<div class="notificationBubble bg-theme-9 absolute rounded-full border-2" style="display: flex;right: 36px;position: relative;justify-content: center;height: 25.2px;top: 44px;min-width: 30px !important;font-style: italic;border-color: #343a40;background-color: #33c4f6;border-width: 3px;">1</div>'
+
 
 function SidebarCollapse() {
     $('.menu-collapsed').toggleClass('d-none');
@@ -86,12 +88,26 @@ socket.on('server info', function (data) {
             .append($serverIcon
                 .css({
                     "border-color": server.color
-                })
+                }),
             ));
     });
 });
 
+socket.on('notification', function (data) {
+    if (data.type == 'server_message') {
+        let room_id = data.room_id;
+        var notification = $('#serverIcons a[room_id=' +room_id +'] .notificationBubble'); 
 
+        if (notification.length) {
+            notification.html(parseInt(notification.html(), 10)+1)
+        }
+        else {
+            $('#serverIcons a[room_id=' +room_id +']').append($notificationBubble);
+        }
+
+    }
+
+});
 
 // Handle ServerList Clicks 
 $serverList.on('click', 'a', function () {
@@ -107,9 +123,18 @@ $serverList.on('click', 'a', function () {
 
 // Handle serverIcon Clicks 
 
+
+$('#menuCollapse').on('click', function () {
+    $('nav').toggleClass('side-nav--simple');
+    $('.brandName').toggle();
+    $(this).find('svg.feather-arrow-right').replaceWith(feather.icons.square.toSvg());
+})
+
+
 $serverIconList.on('click', 'a', function () {
     joinRoom = $(this).text();
     joinRoomID = $(this).attr('room_id');
+    $(this).children('.notificationBubble').remove(); 
     socket.emit('join server', {
         "username": username,
         "roomID": joinRoomID,
@@ -120,10 +145,11 @@ $serverIconList.on('click', 'a', function () {
 
 
 
+
 $('#serverIcons').on("mouseenter", "a", function () {
     var yPos = $(this).position().top + $(this).outerHeight() / 2
-    var serverHoverDivHeight = 24
-    var divPosY = yPos - serverHoverDivHeight / 2
+    var serverHoverDivHeight = 12
+    var divPosY = yPos + serverHoverDivHeight / 2
     var $serverHoverDiv = $('<a/>')
         .addClass('hvr-bubble-left')
         .attr('id', 'tempHover')
@@ -134,7 +160,7 @@ $('#serverIcons').on("mouseenter", "a", function () {
             "color": "var(--font-color)",
             "top": divPosY + "px",
             "left": "87px",
-            "z-index": 2,
+            "z-index": 50,
             "border-radius": "4px",
             "box-shadow": "3px 4px 6px 0px rgba(0,0,0,0.75)"
         }).text($(this).attr('room_name'))
@@ -173,3 +199,4 @@ $(document).on("contextmenu", ".your-server", function (e) {
 
     return false;
 });
+

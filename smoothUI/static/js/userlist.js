@@ -83,6 +83,11 @@ $(document).ready(function() {
     }
 
   
+    $('.userListToggle').on('click', function() {
+        $('.usersOnline').toggle();
+    })
+
+    
     function closeSidebar(e) {
       if ($(e.target).closest(".sidebar-content").length ||
           $(e.target).closest(".chats").length) return;
