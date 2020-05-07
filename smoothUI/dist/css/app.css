@@ -29393,7 +29393,7 @@ video {
   visibility: hidden;
 }
 
-.modal {
+.modalNew {
   margin-top: -10000px;
   margin-left: -10000px;
   background: #00000080;
@@ -29407,21 +29407,21 @@ video {
   top: 0;
 }
 
-.modal.modal__overlap {
+.modalNew.modal__overlap {
   background: #000000a6;
 }
 
-.modal.show {
+.modalNew.show {
   transition: visibility 0s linear 0s, opacity 0.2s 0s;
   visibility: visible;
   opacity: 1;
 }
 
-.modal.show > .modal__content {
+.modalNew.show > .modal__content {
   margin-top: 4rem;
 }
 
-.modal .modal__content {
+.modalNew .modal__content {
   width: 90%;
   transition: margin-top 0.2s;
   margin-top: -4rem;
@@ -29434,25 +29434,25 @@ video {
 }
 
 @media (min-width: 640px) {
-  .modal .modal__content {
+  .modalNew .modal__content {
     width: 460px;
   }
 
-  .modal .modal__content.modal__content--sm {
+  .modalNew .modal__content.modal__content--sm {
     width: 300px;
   }
 
-  .modal .modal__content.modal__content--lg {
+  .modalNew .modal__content.modal__content--lg {
     width: 600px;
   }
 
-  .modal .modal__content.modal__content--xl {
+  .modalNew .modal__content.modal__content--xl {
     width: 600px;
   }
 }
 
 @media (min-width: 1024px) {
-  .modal .modal__content.modal__content--xl {
+  .modalNew .modal__content.modal__content--xl {
     width: 900px;
   }
 }

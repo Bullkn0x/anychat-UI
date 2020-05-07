@@ -129,10 +129,11 @@ padding-right: 2rem;
             <!-- Leave Confirmation Modal -->
             <div id="leaveConfirmModal" class="modal">
                 <div class="leaveConfirmModal-content modal-content">
-                    <h4 class="text-center">Are you sure you want to leave the server '<span id='leaveServerName'></span>'?</h4>
-                    <div class="flex justify-content-around">
-                        <button id="cancelLeave" type="button" class="btn btn-secondary">Cancel</button>
-                        <button id="confirmLeave" type="button" class="btn btn-danger">Confirm Leave</button>
+                    <h4 class="text-center">Are you sure you want to leave the server '<b><span id='leaveServerName'></span></b>'?</h4>
+                    <div class="leaveServerHold"></div>
+                    <div class="justify-center" style = "display:flex;">
+                        <button id="cancelLeave" type="button" class="button mr-4 bg-theme-200">Cancel</button>
+                        <button id="confirmLeave" type="button" class="button ml-4 bg-theme-6">Leave</button>
                     </div>
                 </div>
             </div>

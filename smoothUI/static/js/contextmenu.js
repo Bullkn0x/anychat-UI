@@ -274,6 +274,8 @@ $(function () {
             let leave_room_name = focusedServer.attr('room_name');
             $('#leaveServerName').text(leave_room_name);
             $leaveModal.css('display', 'flex');
+            $('.leaveServerHold').html('');
+            $('.leaveServerHold').append(focusedServer);
             ditchWindow(menuSelector)
         });
 
